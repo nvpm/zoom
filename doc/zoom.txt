@@ -1,0 +1,88 @@
+*zoom.txt*                              `A NVPM Distraction Free implementation`
+================================================================================
+CONTENTS                                                            *NVPMZoom* {
+ 0. Quick Start                                          NVPMZoom-quick-start
+ 1. Installation                                        NVPMZoom-installation
+ 2. Commands                                                NVPMZoom-commands
+ 2. Configuration                                      NVPMZoom-configuration
+=======================================}========================================
+ 0. Quick Start                                         *NVPMZoom-quick-start* {
+
+--- FROM HERE
+
+let NVPMZoom_height = 20
+let NVPMZoom_width  = 80
+let NVPMZoom_top    = 2
+let NVPMZoom_left   = 20
+let NVPMZoom_bottom = 2
+let NVPMZoom_right  = 20
+let NVPMZoom_orient = 'center'
+
+nmap <silent>mn       :NVPMZoomSwap<cr>
+nmap <silent><F11>    :NVPMZoomSwap<cr>
+
+--- UNTIL HERE
+
+=======================================}========================================
+ 1. Installation                                       *NVPMZoom-installation* {
+
+using |vim-plug|
+>
+  Plug 'https://gitlab.com/nvpm/zoom , {'branch' : 'main'}
+
+using |runtimepath|
+>
+    cd $HOME
+    git clone https://gitlab.com/nvpm/zoom
+    echo "set runtimepath+=~/zoom" >> .config/nvim/init.vim
+
+copying files with |bash|
+>
+    cd $HOME
+    git clone https://gitlab.com/nvpm/zoom
+    cp -r zoom/{plugin,syntax,version} .config/nvim
+    mkdir -p .config/nvim/doc
+    cp  zoom/doc/zoom.txt .config/nvim/doc
+    touch .config/nvim/doc/tags
+    cat zoom/doc/tags >> .config/nvim/doc/tags
+
+=======================================}========================================
+ 2. Commands                                               *NVPMZoom-commands* {
+
+There are only those in the following list:
+
+|NVPMZoomSwap|
+
+--------------------------------------------------------------------------------
+NVPMZoomSwap                                                      *NVPMZoomSwap*
+------------
+
+`syntax` → :NVPMZoomSwap
+`args`   →
+`action` →
+description
+
+=======================================}========================================
+ 3. Configuration                                     *NVPMZoom-configuration* {
+
+=======================================}========================================
+================================================================================
+CREATOR                                                         Itamar Soares  {
+
+                                                                      iasj@pm.me
+                                                         https://gitlab.com/iasj
+=======================================}========================================
+NVPM Groups on Gitlab and Telegram                                *nvpm-group* {
+-> https://gitlab.com/nvpm
+
+NVPM plugins
+-> https://gitlab.com/nvpm/zoom [*]
+-> https://gitlab.com/nvpm/nvpm
+-> https://gitlab.com/nvpm/text
+
+Discussions and news on Telegram (in Portuguese and English)
+切https://t.me/nvpmuser (group)
+切https://t.me/nvpmnews (channel)
+=======================================}========================================
+================================================================================
+vim: ft=help tw=78 isk+=<,>,\:,-,' fdm=marker fmr={,} fdl=0 fen
