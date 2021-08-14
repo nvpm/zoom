@@ -1,6 +1,6 @@
 *zoom.txt*                              `A NVPM Distraction Free implementation`
 ================================================================================
-CONTENTS                                                            *NVPMZoom*  
+CONTENTS                                                            *Zoom*  
 01. Introduction                                              *NVPMZoom-intro* {
 
  NVPMZoom  features  a  highly  important functionality, for any decent text
@@ -53,16 +53,16 @@ copying files with |bash|
 
 There are only those in the following list:
 
-|NVPMZoomSwap|
+|Zoom|
 
 --------------------------------------------------------------------------------
-NVPMZoomSwap                                                      *NVPMZoomSwap*
-------------
+Zoom                                                               *ZoomCommand*
+----
 
-`syntax` → :NVPMZoomSwap
-`args`   →
-`action` →
-description
+`syntax` → :Zoom
+`args`   → none
+`action` → toggles on and off the no distraction mode
+|description|
 
 =======================================}========================================
  3. Configuration                                     *NVPMZoom-configuration* {
