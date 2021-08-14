@@ -1,6 +1,4 @@
-if exists('g:NVPM_ZOOM_AUTO_LOADED')|finish|endif
-
-let g:NVPM_ZOOM_AUTO_LOADED = 1
+if exists('ZOOMAUTOLOADED')|finish|else|let ZOOMAUTOLOADED=1|endif
 
 " Private Methods
 fu! s:none() " {
@@ -18,20 +16,26 @@ fu! s:none() " {
   "hi Search guibg='#5c5c5c' guifg='#000000' gui=bold
 
 endf " }
+fu! s:buff() " {
 
+  "set nomodifiable
+  "set readonly
+  "setlocal nobuflisted
+
+endfu "}
 
 " Public Methods
 fu! s:init() dict " {
 
   let self.enabled = 0
 
-  let self.height = get(g: , 'NVPMZoom_height' , 20       )
-  let self.width  = get(g: , 'NVPMZoom_width'  , 80       )
-  let self.top    = get(g: , 'NVPMZoom_top'    , 2        )
-  let self.left   = get(g: , 'NVPMZoom_left'   , 20       )
-  let self.bottom = get(g: , 'NVPMZoom_bottom' , 2        )
-  let self.right  = get(g: , 'NVPMZoom_right'  , 20       )
-  let self.orient = get(g: , 'NVPMZoom_orient' , 'center' )
+  let self.height = get(g: , 'zoom_height' , 20       )
+  let self.width  = get(g: , 'zoom_width'  , 80       )
+  let self.top    = get(g: , 'zoom_top'    , 2        )
+  let self.left   = get(g: , 'zoom_left'   , 20       )
+  let self.bottom = get(g: , 'zoom_bottom' , 2        )
+  let self.right  = get(g: , 'zoom_right'  , 20       )
+  let self.orient = get(g: , 'zoom_orient' , 'center' )
   let self.root   = '.nvpm/zoom'
 
   if type(self.height) != v:t_number || type(self.width) != v:t_number ||
@@ -67,6 +71,9 @@ fu! s:init() dict " {
   call self.save()
 
   let self.split = 0
+  let self.laststatus  = &laststatus
+  let self.showtabline = &showtabline
+  let self.statusline  = &statusline
 
 endf " }
 fu! s:calc() dict " {
@@ -150,6 +157,22 @@ fu! s:hide() dict " {
   let self.enabled = 0
   call self.hset()
 
+  " FUTURE:
+  " this will vanish or use new standard dict look up
+  if exists('g:nvpm.data.loaded')
+    if g:nvpm.data.loaded
+      if !g:nvpm.line.visible|call g:nvpm.line.show()|endif
+    else
+      let &laststatus  = self.laststatus
+      let &showtabline = self.showtabline
+      let &statusline  = self.statusline
+    endif
+  else
+    let &laststatus  = self.laststatus
+    let &showtabline = self.showtabline
+    let &statusline  = self.statusline
+  endif
+
 endf " }
 fu! s:show() dict " {
 
@@ -161,37 +184,30 @@ fu! s:show() dict " {
   if self.top > 0
     exec 'silent! top split '. self.tbuf
     let &l:statusline=' '
-    "set nomodifiable
-    "set readonly
+    call s:buff()
     silent! wincmd p
   endif
 
   if self.bottom > 0
     exec 'silent! bot split '. self.bbuf
     let &l:statusline=' '
-    "set nomodifiable
-    "set readonly
+    call s:buff()
     silent! wincmd p
   endif
 
   if self.left > 0
     exec 'silent! vsplit'. self.lbuf
     let &l:statusline=' '
-    "set nomodifiable
-    "set readonly
+    call s:buff()
     silent! wincmd p
   endif
 
   if self.right > 0
     exec 'silent! rightbelow vsplit '. self.rbuf
     let &l:statusline=' '
-    "set nomodifiable
-    "set readonly
+    call s:buff()
     silent! wincmd p
   endif
-
-  "set modifiable
-  "set noreadonly
 
   call self.size()
 
@@ -201,6 +217,25 @@ fu! s:show() dict " {
   call s:none()
 
   let self.enabled = 1
+
+  " FUTURE:
+  " this will vanish or use new standard dict look up
+  let self.laststatus  = &laststatus
+  let self.showtabline = &showtabline
+  let self.statusline  = &statusline
+  if exists('g:nvpm.data.loaded')
+    if g:nvpm.data.loaded
+      call g:nvpm.line.hide()
+    else
+      set laststatus=0
+      set showtabline=0
+      let &l:statusline=' '
+    endif
+  else
+    set laststatus=0
+    set showtabline=0
+    let &l:statusline=' '
+  endif
 
 endf " }
 fu! s:size() dict " {
@@ -229,7 +264,7 @@ fu! s:size() dict " {
 endfu "}
 
 " -- au functions --
-fu! s:hman() dict " {
+fu! s:help() dict " {
   let bufname=bufname()
   if &filetype == 'man'
     close
@@ -247,10 +282,10 @@ fu! s:hman() dict " {
     bdel
     exec 'edit '. bufname
   endif
-
 endfu "}
 fu! s:quit() dict " {
   call self.hide()
+  quit
 endfu "}
 fu! s:back() dict " {
   if (1+match(self.bufflist,bufname())) && !self.split
@@ -258,6 +293,8 @@ fu! s:back() dict " {
     call self.bdel()
     call self.swap()
   endif
+  " FUTURE:
+  " this will vanish or use new standard dict look up
   if exists('g:nvpm.data.loaded') && !self.split
     if g:nvpm.data.loaded
       call g:nvpm.data.curr.edit()
@@ -266,7 +303,7 @@ fu! s:back() dict " {
 endfu "}
 
 " Interfacing
-fu! zoom#zoom()   " {
+fu! zoom#zoom(...)   " {
 
   let self = {}
 
@@ -280,7 +317,7 @@ fu! zoom#zoom()   " {
   let self.show = function("s:show")
   let self.size = function("s:size")
 
-  let self.hman = function("s:hman")
+  let self.help = function("s:help")
   let self.quit = function("s:quit")
   let self.back = function("s:back")
 

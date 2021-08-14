@@ -1,11 +1,13 @@
 *zoom.txt*                              `A NVPM Distraction Free implementation`
 ================================================================================
-CONTENTS                                                            *NVPMZoom* {
- 0. Quick Start                                          NVPMZoom-quick-start
- 1. Installation                                        NVPMZoom-installation
- 2. Commands                                                NVPMZoom-commands
- 2. Configuration                                      NVPMZoom-configuration
-=======================================}========================================
+CONTENTS                                                            *NVPMZoom*  
+01. Introduction                                              *NVPMZoom-intro* {
+
+ NVPMZoom  features  a  highly  important functionality, for any decent text
+ editor,   known   as   Distraction   Free,   Noise-Free   or   maybe   even
+ No-Distraction-Mode.
+
+=======================================}======================================== 
  0. Quick Start                                         *NVPMZoom-quick-start* {
 
 --- FROM HERE

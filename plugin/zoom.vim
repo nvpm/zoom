@@ -1,18 +1,28 @@
-if exists('g:NVPM_ZOOM_PLUG_LOADED')|finish|endif
+" once {
 
-let g:NVPM_ZOOM_PLUG_LOADED = 1
+if exists('ZOOMPLUGLOADED')|finish|else|let ZOOMPLUGLOADED=1|endif
 
-let NVPMZoom = zoom#zoom()
+" end-once}
+" init {
 
-call NVPMZoom.init()
+let zoom = zoom#zoom()
+call zoom.init()
 
-command! NVPMZoomSwap call NVPMZoom.swap()
+" end-init}
+" cmds {
 
-if get(g:,'NVPMZoom_autocommands',1)
-  augroup NVPMZOOM
+command! Zoom call zoom.swap()
+
+" end-cmds}
+" acmd {
+
+if get(g:,'zoom_autocmd',1)
+  augroup ZOOM
     au!
-    au WinEnter    * call NVPMZoom.back()
-    au BufWinEnter * call NVPMZoom.hman()
-    au QuitPre     * call NVPMZoom.quit()
+    au WinEnter    * call zoom.back()
+    au BufWinEnter * call zoom.help()
+    au QuitPre     * call zoom.quit()
   augroup END
 endif
+
+" end-acmd}
