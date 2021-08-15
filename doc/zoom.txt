@@ -62,7 +62,7 @@ CONTENTS                                                                  *zoom*
 =======================================}========================================
 04. Commands ................................................. *zoom-commands* {
 
-  :Zoom                                                                   *Zoom*
+  :Zoom           args: None                                              *Zoom*
 
                   This  toggles on and off the Zoom mode, in which the current
                   buffer  is  placed  in evidence in the middle of the screen.
