@@ -90,11 +90,9 @@ CONTENTS                                                                  *zoom*
 =======================================}========================================
 05. Configuration ....................................... *zoom-configuration* {
 
-  The following variables can be set with the `let` command in your `init.vim`
-  or your `~/.vimrc`, with the syntax
->
-    let variable = value
-<
+  The following variables can be set with the `let` keyword in your `init.vim`
+  or your `~/.vimrc`, with the syntax `let variable = value` .
+
   zoom_height     number (default 26)                              *zoom_height*
                   global
 
