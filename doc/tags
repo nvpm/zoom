@@ -9,4 +9,7 @@ zoom-quickstart	zoom.txt	/*zoom-quickstart*
 zoom.txt	zoom.txt	/*zoom.txt*
 zoom_autocmds	zoom.txt	/*zoom_autocmds*
 zoom_height	zoom.txt	/*zoom_height*
+zoom_layout	zoom.txt	/*zoom_layout*
+zoom_left	zoom.txt	/*zoom_left*
+zoom_right	zoom.txt	/*zoom_right*
 zoom_width	zoom.txt	/*zoom_width*

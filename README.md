@@ -47,6 +47,19 @@ mkdir -p .config/nvim/doc
 cp zoom/doc/zoom.txt .config/nvim/doc
 nvim +'helptags .config/nvim/doc' +'qall'
 ```
+# Configuration
+
+```vim
+let zoom_height = 26
+let zoom_width  = 80
+let zoom_layout = ''
+let zoom_left   = 0
+let zoom_right  = 0
+
+nmap <silent>mn    :Zoom<cr>
+nmap <silent><F11> :Zoom<cr>
+```
+
 # Usage `:Zoom`
 
 For more info, see `:help zoom`

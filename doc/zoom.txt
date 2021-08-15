@@ -30,11 +30,14 @@ CONTENTS                                                                  *zoom*
 
   --- FROM HERE
 
-    let zoom_height = 26
-    let zoom_width  = 80
+  let zoom_height = 26
+  let zoom_width  = 80
+  let zoom_layout = ''
+  let zoom_left   = 0
+  let zoom_right  = 0
 
-    nmap <silent>mn    :Zoom<cr>
-    nmap <silent><F11> :Zoom<cr>
+  nmap <silent>mn    :Zoom<cr>
+  nmap <silent><F11> :Zoom<cr>
 
   --- UNTIL HERE
 
@@ -123,6 +126,70 @@ CONTENTS                                                                  *zoom*
 
                   Example: `let zoom_width = 100`
 
+  zoom_layout     string (default '')                              *zoom_layout*
+                  global
+
+                  This string sets the kind of layout the main buffer is gonna
+                  be  displayed  as.  The  options  -  for  now  - are 'left',
+                  'right'  or  otherwise.  If  you set it for something  other
+                  than 'left' or 'right', it will  fall  back  to  the default
+                  layout,  which  is centralized. This way, since the  default
+                  for  it  is  the  string   '',   the   default   layout   is
+                  centralized.
+
+                  If  set to 'left', the main buffer is gonna be placed at the
+                  left  most  middle corner of the screen. If the user doesn't
+                  want it to be  glued  together  with  the  corner,  then the
+                  variable `zoom_left` should be used.
+
+                  If  set  to  'right',  the main buffer is gonna be placed at
+                  the right most middle corner  of  the  screen.  If  the user
+                  doesn't  want  it  to  be  glued  together  with the corner,
+                  then the variable `zoom_right` should be used.
+
+                  Note,  the  top  and  bottom  padding  buffers will still be
+                  calculated  in such a way to place the main  buffer  in  the
+                  middle, when  height  is concerned. There is no layout 'top'
+                  or 'bottom', and no variables  'zoom_top'  and 'zoom_bottom'
+                  for now. They exist in the code, but they are  automatically
+                  calculated.  The  variables  that  do  exist  are  gonna  be
+                  important in the future when trying to give support to other
+                  plugins (see :help zoom-friends).
+
+                  Example: `let zoom_layout = right`
+
+  zoom_left       number (default 0)                                 *zoom_left*
+                  global
+
+                  When  zoom_layout is set to 'left', this variable is used to
+                  set the  width  -  in  columns  -  of  the left most padding
+                  buffer. This will give a left offset for  the  main  buffer.
+                  In  the future, this may also be important for support  with
+                  other plug-ins (see :help zoom-friends).
+
+                  Note, when zoom_layout is set  to  'left', Zoom will use the
+                  value of zoom_left along with  zoom_width  to calculate  the
+                  value of zoom_right. In this  situation, setting  zoom_right
+                  to some value will have no effect.
+
+                  Example: `let zoom_left = 10`
+
+  zoom_right      number (default 0)                                *zoom_right*
+                  global
+
+                  When zoom_layout is set to 'right', this variable is used to
+                  set  the  width  -  in  columns  - of the right most padding
+                  buffer. This will give a right offset  for  the main buffer.
+                  In the future, this may also be important for  support  with
+                  other plug-ins (see :help zoom-friends).
+
+                  Note, when zoom_layout is set  to 'right', Zoom will use the
+                  value of zoom_right along with zoom_width  to  calculate the
+                  value of zoom_left. In this situation, setting zoom_right to
+                  some value will have no effect.
+
+                  Example: `let zoom_right = 40`
+
   zoom_autocmds   boolean (default 1)                            *zoom_autocmds*
                   global
 
@@ -130,14 +197,13 @@ CONTENTS                                                                  *zoom*
                   autocommands  created  for  various  reasons,  ranging  from
                   handling help and  man  page splits, and also to prevent the
                   user from gaining focus to  the  padding  buffers, whilst in
-                  Zoom mode. This is usually interesting for plugin developers
-                  and experienced users. If you don't know what an autocommand
-                  is, then  is  highly unlikely you will ever bother with this
-                  variable. Otherwise, see ":help au" and ":help augroup".
+                  Zoom   mode.   This  is  usually  interesting  for   plug-in
+                  developers and  experienced users. If you don't know what an
+                  autocommand  is, then  is  highly  unlikely  you  will  ever
+                  bother with this  variable.  Otherwise,  see  ":help au" and
+                  ":help augroup".
 
                   Example: `let zoom_autocmds = 0`
-
-More configuration options, commands, and features are coming soon.
 
 =======================================}========================================
 06. Compatibility with other plugins .......................... *zoom-friends* {

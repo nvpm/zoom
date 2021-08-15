@@ -1,3 +1,4 @@
+" auto/zoom.vim
 " once {
 
 if exists('ZOOMAUTOLOADED')|finish|else|let ZOOMAUTOLOADED=1|endif
@@ -35,24 +36,20 @@ fu! s:init() dict " {
 
   let self.enabled = 0
 
-  let self.height = get(g: , 'zoom_height' , 26       )
-  let self.width  = get(g: , 'zoom_width'  , 80       )
-  let self.top    = get(g: , 'zoom_top'    , 2        )
-  let self.left   = get(g: , 'zoom_left'   , 20       )
-  let self.bottom = get(g: , 'zoom_bottom' , 2        )
-  let self.right  = get(g: , 'zoom_right'  , 20       )
-  let self.orient = get(g: , 'zoom_orient' , 'center' )
-  let self.root   = '.nvpm/zoom'
+  let self.height  = get(g: , 'zoom_height' , 26 )
+  let self.width   = get(g: , 'zoom_width'  , 80 )
+  let self.left    = get(g: , 'zoom_left'   , 0  )
+  let self.right   = get(g: , 'zoom_right'  , 0  )
+  let self.layout  = get(g: , 'zoom_layout' , '' )
 
-  if type(self.height) != v:t_number || type(self.width) != v:t_number ||
-    \type(self.top)    != v:t_number || type(self.left)  != v:t_number
+  let self.top     = 0
+  let self.bot     = 0
+  let self.root    = '.nvpm/zoom'
 
-    let self.height = 26
-    let self.width  = 80
-    let self.top    = 2
-    let self.left   = 20
-
-  endif
+  let self.left  = self.left  < 0 ? 0 : self.left
+  let self.right = self.right < 0 ? 0 : self.right
+  "let self.top   = self.top   < 0 ? 0 : self.top
+  "let self.bot   = self.bot   < 0 ? 0 : self.bot
 
   let self.tbuf = self.root.'/tbuf'
   let self.bbuf = self.root.'/bbuf'
@@ -87,17 +84,16 @@ fu! s:calc() dict " {
   let currheight = winheight(0)
   let currwidth  = winwidth(0)
 
-  "let self.height = (currheight <= self.height) ? currheight : self.height
-  "let self.width  = (currwidth  <= self.width)  ? currwidth  : self.width
+  let self.top = self.top ? self.top : float2nr((currheight-self.height)/2)
+  let self.bot = self.bot ? self.bot : float2nr((currheight-self.height)/2)
 
-  if self.orient == 'center'
-    let self.top    = floor((currheight-self.height)/2)
-    let self.bottom = floor((currheight-self.height)/2)
-    let self.left   = floor((currwidth-self.width)/2)
-    let self.right  = floor((currwidth-self.width)/2)
-  "else
-    "let self.right  = currwidth  - (self.left + self.width)
-    "let self.bottom = currheight - (self.top  + self.height)
+  if self.layout == 'left'
+    let self.right = currwidth - self.width - self.left
+  elseif self.layout == 'right'
+    let self.left   = currwidth - self.width - self.right
+  else
+    let self.left  = float2nr((currwidth-self.width)/2)
+    let self.right = float2nr((currwidth-self.width)/2)
   endif
 
 endf " }
@@ -216,30 +212,6 @@ fu! s:show() dict " {
   let self.enabled = 1
 
 endf " }
-fu! s:size() dict " {
-
-  if self.left > 0
-    silent! wincmd h
-    exec 'vertical resize ' . string(self.left)
-    silent! wincmd p
-  endif
-
-  if self.bottom > 0
-    silent! wincmd j
-    exec 'resize ' . string(self.bottom)
-    silent! wincmd p
-  endif
-
-  exec 'resize          ' . string(self.height)
-  exec 'vertical resize ' . string(self.width)
-
-  if self.top > 0
-    silent! wincmd k
-    exec 'resize ' . string(self.top)
-    silent! wincmd p
-  endif
-
-endfu "}
 fu! s:chop() dict " {
 
   if self.top > 0
@@ -249,7 +221,7 @@ fu! s:chop() dict " {
     silent! wincmd p
   endif
 
-  if self.bottom > 0
+  if self.bot > 0
     exec 'silent! bot split '. self.bbuf
     let &l:statusline=' '
     call s:buff()
@@ -271,6 +243,30 @@ fu! s:chop() dict " {
   endif
 
 endf " }
+fu! s:size() dict " {
+
+  if self.left > 0
+    silent! wincmd h
+    exec 'vertical resize ' . self.left
+    silent! wincmd p
+  endif
+
+  if self.bot > 0
+    silent! wincmd j
+    exec 'resize ' . self.bot
+    silent! wincmd p
+  endif
+
+  exec 'resize          ' . self.height
+  exec 'vertical resize ' . self.width
+
+  if self.top > 0
+    silent! wincmd k
+    exec 'resize ' . self.top
+    silent! wincmd p
+  endif
+
+endfu "}
 
 " -- au functions --
 fu! s:help() dict " {
