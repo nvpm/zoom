@@ -16,7 +16,7 @@ command! Zoom call zoom.swap()
 " end-cmds}
 " acmd {
 
-if get(g:,'zoom_autocmd',1)
+if get(g:,'zoom_autocmds',1)
   augroup ZOOM
     au!
     au WinEnter    * call zoom.back()

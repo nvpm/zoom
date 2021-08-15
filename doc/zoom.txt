@@ -1,80 +1,163 @@
 *zoom.txt*                              `A NVPM Distraction Free implementation`
 ================================================================================
-CONTENTS                                                            *Zoom*  
-01. Introduction                                              *NVPMZoom-intro* {
+CONTENTS                                                                  *zoom*
+01. Introduction ................................................ *zoom-intro* {
 
- NVPMZoom  features  a  highly  important functionality, for any decent text
- editor,   known   as   Distraction   Free,   Noise-Free   or   maybe   even
- No-Distraction-Mode.
+  Zoom  features a highly important functionality, for any decent text editor,
+  known as Distraction Free, Noise-Free or maybe even No-Distraction-Mode. The
+  feature  consists  on  making  everything  hidden but the text being edited.
+  Also, the very window that holds the text is also put in evidence, mainly in
+  the middle of the screen. This plug-in is able  to do all that and more. The
+  feature  can  mostly  be  appreciated  by  computer programmers,  novelists,
+  journalists, paper writers, and others. Because  when  the  idea  comes, you
+  don't wanna be distracted with tablines, filenames or anything else for that
+  matter.
 
-=======================================}======================================== 
- 0. Quick Start                                         *NVPMZoom-quick-start* {
-
---- FROM HERE
-
-let NVPMZoom_height = 20
-let NVPMZoom_width  = 80
-let NVPMZoom_top    = 2
-let NVPMZoom_left   = 20
-let NVPMZoom_bottom = 2
-let NVPMZoom_right  = 20
-let NVPMZoom_orient = 'center'
-
-nmap <silent>mn       :NVPMZoomSwap<cr>
-nmap <silent><F11>    :NVPMZoomSwap<cr>
-
---- UNTIL HERE
+  It's  also important to mention that Zoom is 100% compatible with all NVPM's
+  plug-ins  the  user  can  find  in the group's main repository. See the NVPM
+  groups section below.
 
 =======================================}========================================
- 1. Installation                                       *NVPMZoom-installation* {
+02. Quick Start ............................................ *zoom-quickstart* {
 
-using |vim-plug|
->
-  Plug 'https://gitlab.com/nvpm/zoom , {'branch' : 'main'}
+  The following is all the available configuration variables and commands that
+  can  go  in your init.vim or your ~/.vimrc. Please see the next chapters for
+  more info.
 
-using |runtimepath|
->
+  --- FROM HERE
+
+    let zoom_height = 26
+    let zoom_width  = 80
+
+    nmap <silent>mn    :Zoom<cr>
+    nmap <silent><F11> :Zoom<cr>
+
+  --- UNTIL HERE
+
+  After  that  you  can  toggle  the Zoom mode (no-distraction) with the :Zoom
+  command, or with the assigned keyboard  shortcuts  -  mn and F11 in the case
+  above.
+
+=======================================}========================================
+03. Installation ......................................... *zoom-installation* {
+
+  Using |vim-plug|
+
+    Plug 'https://gitlab.com/nvpm/zoom' , {'branch' : 'main'}
+
+  Using |runtimepath|
+
     cd $HOME
     git clone https://gitlab.com/nvpm/zoom
     echo "set runtimepath+=~/zoom" >> .config/nvim/init.vim
 
-copying files with |bash|
->
+  Copying files with |bash|
+
     cd $HOME
     git clone https://gitlab.com/nvpm/zoom
-    cp -r zoom/{plugin,syntax,version} .config/nvim
+    cp -r zoom/{plugin,autoload,version,LICENSE} .config/nvim
     mkdir -p .config/nvim/doc
-    cp  zoom/doc/zoom.txt .config/nvim/doc
-    touch .config/nvim/doc/tags
-    cat zoom/doc/tags >> .config/nvim/doc/tags
+    cp zoom/doc/zoom.txt .config/nvim/doc
+    nvim +'helptags .config/nvim/doc' +'qall'
 
 =======================================}========================================
- 2. Commands                                               *NVPMZoom-commands* {
+04. Commands ................................................. *zoom-commands* {
 
-There are only those in the following list:
+  :Zoom                                                                   *Zoom*
 
-|Zoom|
+                  This  toggles on and off the Zoom mode, in which the current
+                  buffer  is  placed  in evidence in the middle of the screen.
+                  To  accomplish  that,  Zoom   plug-in   creates  four  other
+                  buffers   around   the   current   buffer   and   by   using
+                  autocommands,   prevents the  user from  moving  into  those
+                  buffers (padding buffers).
 
---------------------------------------------------------------------------------
-Zoom                                                               *ZoomCommand*
-----
+                  The  autocommands  also  prevent the creation of splits when
+                  calling a help or man page  filetypes, either by `K` command
+                  or  by  one  of  ":help  something"  and  ":Man  something".
 
-`syntax` → :Zoom
-`args`   → none
-`action` → toggles on and off the no distraction mode
-|description|
+                  To  be  honest,  splits  still don't fare well whist in zoom
+                  mode.  Thankfully,  opening  a  split  in  zoom  mode  kinda
+                  defeats  the purpose of  using  Zoom  in  the  first  place.
+                  Nevertheless,  I'll  give split-handling support eventually.
+
+                  See configuration section |zoom-configuration| for more info.
 
 =======================================}========================================
- 3. Configuration                                     *NVPMZoom-configuration* {
+05. Configuration ....................................... *zoom-configuration* {
+
+  The following variables can be set with the `let` command in your `init.vim`
+  or your `~/.vimrc`, with the syntax
+>
+    let variable = value
+<
+  zoom_height     number (default 26)                              *zoom_height*
+                  global
+
+                  This  variable  controls  the  desired  height  - in lines -
+                  of the middle window whist in Zoom mode. Zoom will calculate
+                  the  available  space  and  set  the  heights  of  the upper
+                  and  bottom  padding  buffers,  whose  creation  is  avoided
+                  when there is no space for them.
+
+                  Example: `let zoom_height = 20`
+
+  zoom_width      number (default 80)                               *zoom_width*
+                  global
+
+                  This  variable  controls  the  desired  width - in columns -
+                  of  the  middle  window,  whist  in  Zoom  mode.  Zoom  will
+                  calculate  the  available  space  and  set  the  widths   of
+                  the left and right padding buffers, whose creation is
+                  avoided when there is no space for them.
+
+                  An   extra   care   must   be   taken   if  the  user  likes
+                  using  line-numbers (set number). This will  obviously  take
+                  width space  and  therefore  not  being what the user had in
+                  mind  when  setting  this  variable.  Any  other  Vim/Neovim
+                  command  that  opens  the  Gutter  on  the right  will  also
+                  implicate  in  this  same  undesirable behaviour.  For  now,
+                  no handling is being done for this.
+
+                  Example: `let zoom_width = 100`
+
+zoom_autocmds     boolean (default 1)                            *zoom_autocmds*
+                  global
+
+                  This   option   can  disable/enable  the  creation  of  some
+                  autocommands  created  for  various  reasons,  ranging  from
+                  handling help and  man  page splits, and also to prevent the
+                  user from gaining focus to  the  padding  buffers,  whist in
+                  Zoom mode. This is usually interesting for plugin developers
+                  and  experienced users. If you don't know what a autocommand
+                  is, then  you  is  highly unlikely you will ever bother with
+                  this  variable. Otherwise,  see  :help  au,  :help  augroup.
+
+                  Example: `let zoom_autocmds = 0`
+
+More configuration option, commands, and features are coming soon.
+
+=======================================}========================================
+06. Compatibility with other plugins .......................... *zoom-friends* {
+
+  For  now,  Zoom  is  only compatible with the nvpm plugin, in which it calls
+  g:nvpm.line.hide() when  :Zoom  is  called.  This  can  vanish the nvpm line
+  completely,  which  can  be  brought  back  into  view  with  :NVPMLineSwap.
+
+  There  are some plug-ins that also create padding buffers, such as: NERDTree
+  and TagBar.  Although they are great plug-ins, I fear they may not fare well
+  with Zoom yet. However, I intend to give compatibility support for them (and
+  maybe others)  as  soon as time agrees to let me. I appreciate your patience
+  either way.
 
 =======================================}========================================
 ================================================================================
-CREATOR                                                         Itamar Soares  {
+Creator                                                                        {
 
-                                                                      iasj@pm.me
-                                                         https://gitlab.com/iasj
+Itamar Soares -> `iasj@pm.me`
+telegram: `@iasjr`
 =======================================}========================================
-NVPM Groups on Gitlab and Telegram                                *nvpm-group* {
+NVPM Groups on Gitlab and Telegram                                             {
 -> https://gitlab.com/nvpm
 
 NVPM plugins
@@ -83,8 +166,9 @@ NVPM plugins
 -> https://gitlab.com/nvpm/text
 
 Discussions and news on Telegram (in Portuguese and English)
-切https://t.me/nvpmuser (group)
-切https://t.me/nvpmnews (channel)
-=======================================}========================================
+-> https://t.me/nvpmuser (group)
+-> https://t.me/nvpmnews (channel)
+
+}
 ================================================================================
 vim: ft=help tw=78 isk+=<,>,\:,-,' fdm=marker fmr={,} fdl=0 fen
