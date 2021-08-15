@@ -6,12 +6,11 @@ CONTENTS                                                                  *zoom*
   Zoom  features a highly important functionality, for any decent text editor,
   known as Distraction Free, Noise-Free or maybe even No-Distraction-Mode. The
   feature  consists  on  making  everything  hidden but the text being edited.
-  Also, the very window that holds the text is also put in evidence, mainly in
-  the middle of the screen. This plug-in is able  to do all that and more. The
-  feature  can  mostly  be  appreciated  by  computer programmers,  novelists,
-  journalists, paper writers, and others. Because  when  the  idea  comes, you
-  don't wanna be distracted with tablines, filenames or anything else for that
-  matter.
+  Also, the very window that holds the text is  put in evidence, mainly in the
+  middle of the screen. This plug-in is able to do  all  that  and  more.  The
+  feature  can  mostly  be appreciated by programmers, novelists, journalists,
+  paper writers, and others.  Because  when the idea comes, you don't wanna be
+  distracted  with  tablines, filenames or  anything  else  for  that  matter.
 
   It's  also important to mention that Zoom is 100% compatible with all NVPM's
   plug-ins  the  user  can  find  in the group's main repository. See the NVPM
