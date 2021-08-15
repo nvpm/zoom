@@ -75,7 +75,7 @@ CONTENTS                                                                  *zoom*
                   calling a help or man page  filetypes, either by `K` command
                   or  by  one  of  ":help  something"  and  ":Man  something".
 
-                  To  be  honest,  splits  still don't fare well whist in zoom
+                  To  be  honest,  splits still don't fare well whilst in zoom
                   mode.  Thankfully,  opening  a  split  in  zoom  mode  kinda
                   defeats  the purpose of  using  Zoom  in  the  first  place.
                   Nevertheless,  I'll  give split-handling support eventually.
@@ -93,11 +93,11 @@ CONTENTS                                                                  *zoom*
   zoom_height     number (default 26)                              *zoom_height*
                   global
 
-                  This  variable  controls  the  desired  height  - in lines -
-                  of the middle window whist in Zoom mode. Zoom will calculate
-                  the  available  space  and  set  the  heights  of  the upper
-                  and  bottom  padding  buffers,  whose  creation  is  avoided
-                  when there is no space for them.
+                  This  variable  controls  the desired height - in lines - of
+                  the middle window whilst in  Zoom  mode. Zoom will calculate
+                  the available space and set the heights  of  the  upper  and
+                  bottom padding buffers, whose creation is avoided when there
+                  is no space for them.
 
                   Example: `let zoom_height = 20`
 
@@ -105,7 +105,7 @@ CONTENTS                                                                  *zoom*
                   global
 
                   This  variable  controls  the  desired  width - in columns -
-                  of  the  middle  window,  whist  in  Zoom  mode.  Zoom  will
+                  of  the  middle  window,  whilst in  Zoom  mode.  Zoom  will
                   calculate  the  available  space  and  set  the  widths   of
                   the left and right padding buffers, whose creation is
                   avoided when there is no space for them.
@@ -126,7 +126,7 @@ zoom_autocmds     boolean (default 1)                            *zoom_autocmds*
                   This   option   can  disable/enable  the  creation  of  some
                   autocommands  created  for  various  reasons,  ranging  from
                   handling help and  man  page splits, and also to prevent the
-                  user from gaining focus to  the  padding  buffers,  whist in
+                  user from gaining focus to  the  padding  buffers, whilst in
                   Zoom mode. This is usually interesting for plugin developers
                   and  experienced users. If you don't know what a autocommand
                   is, then  you  is  highly unlikely you will ever bother with
