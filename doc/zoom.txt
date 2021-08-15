@@ -18,8 +18,7 @@ CONTENTS                                                                  *zoom*
   distracted  with  tablines, filenames or  anything  else  for  that  matter.
 
   It's  also important to mention that Zoom is 100% compatible with all NVPM's
-  plug-ins  the  user  can  find  in the group's main repository. See the NVPM
-  groups section below.
+  plug-ins. The user can find them in the `NVPM groups` section below below.
 
 =======================================}========================================
 02. Quick Start ............................................ *zoom-quickstart* {
