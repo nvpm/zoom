@@ -120,7 +120,7 @@ CONTENTS                                                                  *zoom*
 
                   Example: `let zoom_width = 100`
 
-zoom_autocmds     boolean (default 1)                            *zoom_autocmds*
+  zoom_autocmds   boolean (default 1)                            *zoom_autocmds*
                   global
 
                   This   option   can  disable/enable  the  creation  of  some
@@ -128,13 +128,13 @@ zoom_autocmds     boolean (default 1)                            *zoom_autocmds*
                   handling help and  man  page splits, and also to prevent the
                   user from gaining focus to  the  padding  buffers, whilst in
                   Zoom mode. This is usually interesting for plugin developers
-                  and  experienced users. If you don't know what a autocommand
-                  is, then  you  is  highly unlikely you will ever bother with
-                  this  variable. Otherwise,  see  :help  au,  :help  augroup.
+                  and experienced users. If you don't know what an autocommand
+                  is, then  is  highly unlikely you will ever bother with this
+                  variable. Otherwise, see ":help au" and ":help augroup".
 
                   Example: `let zoom_autocmds = 0`
 
-More configuration option, commands, and features are coming soon.
+More configuration options, commands, and features are coming soon.
 
 =======================================}========================================
 06. Compatibility with other plugins .......................... *zoom-friends* {
