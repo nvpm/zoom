@@ -47,11 +47,7 @@ mkdir -p .config/nvim/doc
 cp zoom/doc/zoom.txt .config/nvim/doc
 nvim +'helptags .config/nvim/doc' +'qall'
 ```
-# Usage
-
-```console
-:Zoom
-```
+# Usage `:Zoom`
 
 For more info, see `:help zoom`
 
