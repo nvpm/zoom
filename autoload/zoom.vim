@@ -1,7 +1,7 @@
 " auto/zoom.vim
 " once {
 
-if exists('ZOOMAUTOLOADED')|finish|else|let ZOOMAUTOLOADED=1|endif
+if !NVPMTEST&&exists('ZOOMAUTOLOAD')|finish|else|let ZOOMAUTOLOAD=1|endif
 
 " end-once}
 " priv {
@@ -308,7 +308,7 @@ fu! s:back() dict " {
 endfu "}
 
 " }
-" type {
+" objc {
 
 fu! zoom#zoom(...) " {
 
