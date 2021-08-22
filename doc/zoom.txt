@@ -93,7 +93,7 @@ CONTENTS                                                                  *zoom*
 05. Configuration ....................................... *zoom-configuration* {
 
   The following variables can be set with the `let` keyword in your `init.vim`
-  or your `~/.vimrc`, with the syntax `let variable = value` .
+  or in your `~/.vimrc`, with the syntax `let variable = value` .
 
   zoom_height     number (default 26)                              *zoom_height*
                   global
@@ -131,7 +131,7 @@ CONTENTS                                                                  *zoom*
                   This string sets the kind of layout the main buffer is gonna
                   be  displayed  as.  The  options  -  for  now  - are 'left',
                   'right'  or  otherwise.  If  you set it for something  other
-                  than 'left' or 'right', it will  fall  back  to  the default
+                  than 'left' or 'right', it will  fall  back into the default
                   layout,  which  is centralized. This way, since the  default
                   for  it  is  the  string   '',   the   default   layout   is
                   centralized.
@@ -139,12 +139,12 @@ CONTENTS                                                                  *zoom*
                   If  set to 'left', the main buffer is gonna be placed at the
                   left  most  middle corner of the screen. If the user doesn't
                   want it to be  glued  together  with  the  corner,  then the
-                  variable `zoom_left` should be used.
+                  variable `zoom_left` should also be used.
 
                   If  set  to  'right',  the main buffer is gonna be placed at
                   the right most middle corner  of  the  screen.  If  the user
                   doesn't  want  it  to  be  glued  together  with the corner,
-                  then the variable `zoom_right` should be used.
+                  then the variable `zoom_right` should also be used.
 
                   Note,  the  top  and  bottom  padding  buffers will still be
                   calculated  in such a way to place the main  buffer  in  the
@@ -198,8 +198,8 @@ CONTENTS                                                                  *zoom*
                   user from gaining focus to  the  padding  buffers, whilst in
                   Zoom   mode.   This  is  usually  interesting  for   plug-in
                   developers and  experienced users. If you don't know what an
-                  autocommand  is, then  is  highly  unlikely  you  will  ever
-                  bother with this  variable.  Otherwise,  see  ":help au" and
+                  autocommand is, then is highly unlikely you  will ever  need
+                  to bother with this variable. Otherwise, see  ":help au" and
                   ":help augroup".
 
                   Example: `let zoom_autocmds = 0`
