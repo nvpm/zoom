@@ -158,6 +158,7 @@ fu! s:hide() dict " {
   call self.bdel()
   let self.enabled = 0
   call self.hset()
+  set cmdheight=1
 
   " FUTURE:
   " this will vanish or use new standard dict look up
@@ -214,20 +215,6 @@ fu! s:show() dict " {
 endf " }
 fu! s:chop() dict " {
 
-  if self.top > 0
-    exec 'silent! top split '. self.tbuf
-    let &l:statusline=' '
-    call s:buff()
-    silent! wincmd p
-  endif
-
-  if self.bot > 0
-    exec 'silent! bot split '. self.bbuf
-    let &l:statusline=' '
-    call s:buff()
-    silent! wincmd p
-  endif
-
   if self.left > 0
     exec 'silent! vsplit'. self.lbuf
     let &l:statusline=' '
@@ -242,18 +229,27 @@ fu! s:chop() dict " {
     silent! wincmd p
   endif
 
+  if self.top > 0
+    exec 'silent! top split '. self.tbuf
+    let &l:statusline=' '
+    call s:buff()
+    silent! wincmd p
+  endif
+
+  "if self.bot > 0
+    "exec 'silent! bot split '. self.bbuf
+    "let &l:statusline=' '
+    "call s:buff()
+    "silent! wincmd p
+  "endif
+
+
 endf " }
 fu! s:size() dict " {
 
   if self.left > 0
     silent! wincmd h
     exec 'vertical resize ' . self.left
-    silent! wincmd p
-  endif
-
-  if self.bot > 0
-    silent! wincmd j
-    exec 'resize ' . self.bot
     silent! wincmd p
   endif
 
@@ -264,6 +260,13 @@ fu! s:size() dict " {
     silent! wincmd k
     exec 'resize ' . self.top
     silent! wincmd p
+  endif
+
+  if self.bot > 0
+    exec 'set cmdheight='.self.bot
+    "silent! wincmd j
+    "exec 'resize ' . self.bot
+    "silent! wincmd p
   endif
 
 endfu "}
