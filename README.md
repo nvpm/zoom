@@ -27,21 +27,21 @@
 ## Using [vim-plug](https://github.com/junegunn/vim-plug)
 
 ```vim
-Plug 'https://gitlab.com/nvpm/zoom' , {'branch' : 'main'}
+Plug 'nvpm/zoom'
 ```
 
 ## Using runtimepath
 
 ```bash
 cd $HOME
-git clone https://gitlab.com/nvpm/zoom
+git clone https://github.com/nvpm/zoom
 echo "set runtimepath+=~/zoom" >> .config/nvim/init.vim
 ```
 ## Copying files with bash
 
 ```bash
 cd $HOME
-git clone https://gitlab.com/nvpm/zoom
+git clone https://github.com/nvpm/zoom
 cp -r zoom/{plugin,autoload,version,LICENSE} .config/nvim
 mkdir -p .config/nvim/doc
 cp zoom/doc/zoom.txt .config/nvim/doc
