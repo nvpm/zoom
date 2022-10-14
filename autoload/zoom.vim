@@ -1,7 +1,7 @@
 " auto/zoom.vim
 " once {
 
-if !NVPMTEST&&exists('ZOOMAUTOLOAD')|finish|else|let ZOOMAUTOLOAD=1|endif
+if exists('ZOOMAUTOLOAD')|finish|else|let ZOOMAUTOLOAD=1|endif
 
 " end-once}
 " priv {

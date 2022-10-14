@@ -1,7 +1,7 @@
 " plug/zoom.vim
 " once {
 
-if !NVPMTEST&&exists('ZOOMPLUGLOAD')|finish|else|let ZOOMPLUGLOAD=1|endif
+if exists('ZOOMPLUGLOAD')|finish|else|let ZOOMPLUGLOAD=1|endif
 
 " end-once}
 " init {
