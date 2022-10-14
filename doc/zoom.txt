@@ -224,13 +224,13 @@ Creator                                                                        {
 Itamar Soares -> `iasj@pm.me`
 telegram: `@iasjr`
 =======================================}========================================
-NVPM Groups on Gitlab and Telegram                                             {
--> https://gitlab.com/nvpm
+NVPM Groups on Github and Telegram                                             {
+-> https://github.com/nvpm
 
 NVPM plugins
--> https://gitlab.com/nvpm/zoom [*]
--> https://gitlab.com/nvpm/nvpm
--> https://gitlab.com/nvpm/text
+-> https://github.com/nvpm/zoom [*]
+-> https://github.com/nvpm/nvpm
+-> https://github.com/nvpm/text
 
 Discussions and news on Telegram (in Portuguese and English)
 -> https://t.me/nvpmuser (group)
